@@ -4,6 +4,8 @@ authors = "Justin Kelly"
 brief   = "Layer 7 Monadic Session Types & Gauge Flux Verification Suite"
 
 depends = base
+        , contrib
+        , idris2-QuickCheck
         , Idris2-Multiset-Core
         , Idris2-Multiset-Transform
         , Idris2-Geometry
@@ -15,6 +17,10 @@ depends = base
 sourcedir = "Library"
 
 modules = Wiki.Main
+        , Wiki.Generators
+        , Wiki.GaugeInvarianceSpec
+        , Wiki.GaugeSessionTypeSpec
+        , Wiki.FieldsScaleTransformSpec
 
 main = Wiki.Main
 executable = lfields-wiki
