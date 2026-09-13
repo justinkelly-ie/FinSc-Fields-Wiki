@@ -27,7 +27,7 @@
 - **QuickCheck Generators:** Arbitrary instances for `GaugePhase`, `GaugeFieldTensor`, `BoxInt`, and `UnixelFraction`.
 
 ### 5. `Library/Wiki/Main.idr`
-- **Verification Runner:** Literate Idris 2 test runner executing compile-time `%macro` reflection proofs and QuickCheck property test suites for Layer 7 (`lfields-wiki`).
+- **Verification Runner:** Literate Idris 2 test runner executing compile-time `%macro` reflection proofs and QuickCheck property test suites for Layer 7 (`fields-wiki`).
 
 ---
 
@@ -37,7 +37,7 @@ To compile the literate verification suite and execute the test runner binary:
 
 ```bash
 idris2 --build Idris2-Fields-Wiki.ipkg
-./build/exec/lfields-wiki
+./build/exec/fields-wiki
 ```
 
 ---

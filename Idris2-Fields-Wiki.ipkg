@@ -23,4 +23,4 @@ modules = Wiki.Main
         , Wiki.FieldsScaleTransformSpec
 
 main = Wiki.Main
-executable = lfields-wiki
+executable = fields-wiki
