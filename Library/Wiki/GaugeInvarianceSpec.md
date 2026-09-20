@@ -6,7 +6,7 @@ Documents and verifies discrete U(1) gauge group algebra, gauge phase compositio
 
 ## 1. Mathematical Foundation & Gauge Homomorphisms
 
-Layer 7 `Idris2-Fields` constructs discrete gauge group transformations and field potential interactions:
+Layer 7 `Idris2-Fields` constructs discrete gauge group transformations and 2-form Maxel curvature multiset field potential interactions:
 
 1. **Gauge Group Identity Homomorphism**: $\text{mulGaugePhase}(\text{unitGaugePhase}, g) \equiv g$
 2. **Gauge Group Inverse Homomorphism**: $\text{mulGaugePhase}(g, \text{invGaugePhase}(g)) \equiv \text{unitGaugePhase}$
@@ -15,13 +15,26 @@ Layer 7 `Idris2-Fields` constructs discrete gauge group transformations and fiel
 
 ---
 
-## 2. Formal Specification & Verification Suite
+## 2. Gauge Curvature 2-Form <-> Maxel Multiset Equivalence Dictionary
+
+| Physical Gauge Field Concept | Multiset Basis Primitive | Transform Equivalent |
+| :--- | :--- | :--- |
+| **Electric Field Component ($E$)** | Pixel `[1, 0]` (`MkPixel 1 0`) | `lookupPixel (MkPixel 1 0)` |
+| **Magnetic Flux Component ($B$)** | Pixel `[2, 3]` (`MkPixel 2 3`) | `lookupPixel (MkPixel 2 3)` |
+| **Gauge Curvature 2-Form ($F$)** | Native 2-Form `Maxel` | `makeGaugeFieldMaxel e b` |
+| **Gauge Energy Density ($Q_{\text{EM}}$)** | $E^2 + B^2$ Functional | `gaugeFieldEnergy` |
+| **Gauge Rotation / Warping ($\theta$)** | Weight-Preserving Transform | `gaugePhaseTransform sec phase` |
+
+---
+
+## 3. Formal Specification & Verification Suite
 
 ```idris
 module Wiki.GaugeInvarianceSpec
 
 import Core.BoxInt
 import Core.UnixelFraction
+import Core.VexelMaxel
 import Math.Fields.GaugeGroup
 import Wiki.Generators
 import public QuickCheck
@@ -36,13 +49,13 @@ prop_gaugeGroupIdentity g =
 
 ||| 2. Electromagnetic Energy Density Invariance: computeFieldEnergy (warpFieldByGaugeTensor phase tensor) == computeFieldEnergy tensor
 public export
-prop_fieldEnergyInvariance : GaugePhase -> GaugeFieldTensor -> Bool
+prop_fieldEnergyInvariance : GaugePhase -> Maxel -> Bool
 prop_fieldEnergyInvariance phase tensor =
   computeFieldEnergy (warpFieldByGaugeTensor phase tensor) == computeFieldEnergy tensor
 
 ||| 3. 4D Dihedral Field Energy Invariance: computeFieldEnergy (warpFieldByDihedralPhase p tensor) == computeFieldEnergy tensor
 public export
-prop_dihedralFieldInvariance : BoxInt -> GaugeFieldTensor -> Bool
+prop_dihedralFieldInvariance : BoxInt -> Maxel -> Bool
 prop_dihedralFieldInvariance p tensor =
   computeFieldEnergy (warpFieldByDihedralPhase p tensor) == computeFieldEnergy tensor
 
@@ -52,7 +65,7 @@ public export
 prfStaticGaugeIdentity g = verifyGaugeGroupIdentity g
 
 public export
-0 prfStaticEnergyInvariance : (phase : GaugePhase) -> (tensor : GaugeFieldTensor) ->
+0 prfStaticEnergyInvariance : (phase : GaugePhase) -> (tensor : Maxel) ->
                              computeFieldEnergy (warpFieldByGaugeTensor phase tensor) = computeFieldEnergy tensor
 prfStaticEnergyInvariance phase tensor = verifyGaugeInvariance phase tensor
 

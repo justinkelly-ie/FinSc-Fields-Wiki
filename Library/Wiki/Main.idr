@@ -8,14 +8,15 @@ import Core.Goh
 import Wiki.GaugeInvarianceSpec
 import Wiki.GaugeSessionTypeSpec
 import Wiki.FieldsScaleTransformSpec
+import Wiki.GaugeFieldStreamSpec
 
 %default total
 
 0 prfSessionDuality : (dualProto (dualProto (Send Nat Close)) = Send Nat Close)
 prfSessionDuality = verifySessionDuality (Send Nat Close)
 
-0 prfGaugeInvariance : (computeFieldEnergy (warpFieldByGaugeTensor Math.Fields.GaugeGroup.unitGaugePhase (MkGaugeFieldTensor (intToBoxInt 10) (intToBoxInt 5))) = computeFieldEnergy (MkGaugeFieldTensor (intToBoxInt 10) (intToBoxInt 5)))
-prfGaugeInvariance = verifyGaugeInvariance Math.Fields.GaugeGroup.unitGaugePhase (MkGaugeFieldTensor (intToBoxInt 10) (intToBoxInt 5))
+0 prfGaugeInvariance : (computeFieldEnergy (warpFieldByGaugeTensor Math.Fields.GaugeGroup.unitGaugePhase (makeGaugeFieldTensor (intToBoxInt 10) (intToBoxInt 5))) = computeFieldEnergy (makeGaugeFieldTensor (intToBoxInt 10) (intToBoxInt 5)))
+prfGaugeInvariance = verifyGaugeInvariance Math.Fields.GaugeGroup.unitGaugePhase (makeGaugeFieldTensor (intToBoxInt 10) (intToBoxInt 5))
 
 main : IO ()
 main = do
@@ -44,6 +45,14 @@ main = do
      then putStrLn "  [TEST 5] Fields ScaleTransform & Gauge Action Associativity (QuickCheck): PASSED ✅"
      else putStrLn "  [TEST 5] Fields ScaleTransform & Gauge Action Associativity (QuickCheck): FAILED ❌"
 
+  okStream <- auditGaugeFieldStreamSpecProof
+  if okStream
+     then putStrLn "  [TEST 6] Gauge Field Tensor Stream Flux Integration: PASSED ✅"
+     else putStrLn "  [TEST 6] Gauge Field Tensor Stream Flux Integration: FAILED ❌"
+
   putStrLn "========================================================"
-  putStrLn " ✨ ALL LAYER 7 GAUGE FIELD SUITES & QUICKCHECK PASSED ✨"
+  if okInvariance && okSession && okScale && okStream
+     then putStrLn " ✨ ALL LAYER 7 GAUGE FIELD SUITES & QUICKCHECK PASSED ✨"
+     else putStrLn " ❌ LAYER 7 GAUGE FIELD VERIFICATION FAILED"
   putStrLn "========================================================"
+

@@ -30,12 +30,12 @@ Arbitrary GaugePhase where
   coarbitrary (MkGaugePhase p) gen = coarbitrary p gen
 
 public export
-Arbitrary GaugeFieldTensor where
+Arbitrary Maxel where
   arbitrary = do
     e <- arbitrary
     b <- arbitrary
-    pure (MkGaugeFieldTensor e b)
-  coarbitrary (MkGaugeFieldTensor e b) gen = coarbitrary e (coarbitrary b gen)
+    pure (makeGaugeFieldTensor e b)
+  coarbitrary m gen = coarbitrary (electricField m) (coarbitrary (magneticFlux m) gen)
 
 public export
 qc : (Arbitrary a, Show a, Testable prop) => (a -> prop) -> QCRes

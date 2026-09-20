@@ -22,6 +22,7 @@ module Wiki.FieldsScaleTransformSpec
 import Data.Vect
 import Core.BoxInt
 import Core.UnixelFraction
+import Core.VexelMaxel
 import Math.Fields.GaugeGroup
 import Geometry.Applicative
 import Geometry.MetricalBounds
@@ -32,14 +33,14 @@ import public QuickCheck
 
 ||| 1. Gauge Action Associativity: warp (mul g1 g2) tensor == warp g1 (warp g2 tensor)
 public export
-prop_gaugeActionAssociativity : GaugePhase -> GaugePhase -> GaugeFieldTensor -> Bool
+prop_gaugeActionAssociativity : GaugePhase -> GaugePhase -> Maxel -> Bool
 prop_gaugeActionAssociativity g1 g2 tensor =
   warpFieldByGaugeTensor (mulGaugePhase g1 g2) tensor ==
   warpFieldByGaugeTensor g1 (warpFieldByGaugeTensor g2 tensor)
 
 ||| 2. Metrically Transported Energy Density Invariance
 public export
-prop_metricalTransportEnergyInvariance : GaugePhase -> GaugeFieldTensor -> Bool
+prop_metricalTransportEnergyInvariance : GaugePhase -> Maxel -> Bool
 prop_metricalTransportEnergyInvariance phase tensor =
   let u1 = mkUnixelFraction (intToBoxInt 1) 1
       u0 = mkUnixelFraction (intToBoxInt 0) 1
