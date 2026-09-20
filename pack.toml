@@ -1,0 +1,29 @@
+[package]
+name = "Idris2-Fields-Wiki"
+version = "0.1.0"
+ipkg = "Idris2-Fields-Wiki.ipkg"
+
+[custom.all.Idris2-Multiset-Core]
+type = "local"
+path = "../Idris2-Multiset-Core"
+ipkg = "Idris2-Multiset-Core.ipkg"
+
+[custom.all.Idris2-Multiset-Transform]
+type = "local"
+path = "../Idris2-Multiset-Transform"
+ipkg = "Idris2-Multiset-Transform.ipkg"
+
+[custom.all.Idris2-Electromagnetism]
+type = "local"
+path = "../Idris2-Electromagnetism"
+ipkg = "Idris2-Electromagnetism.ipkg"
+
+[custom.all.Idris2-Fields]
+type = "local"
+path = "../Idris2-Fields"
+ipkg = "Idris2-Fields.ipkg"
+
+[custom.all.idris2-QuickCheck]
+type = "local"
+path = "../idris2-QuickCheck"
+ipkg = "idris2-QuickCheck.ipkg"
