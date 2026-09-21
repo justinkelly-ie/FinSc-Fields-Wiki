@@ -1,11 +1,11 @@
-# Idris2-Fields-Wiki
+# FinSc-Fields-Wiki
 
 [![Idris 2 Verification](https://img.shields.io/badge/Idris_2-0.8.0-blue.svg)](https://www.idris-lang.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-**Literate Verification Suite & Specification Manual for Layer 7 (`Idris2-Fields`)**
+**Literate Verification Suite & Specification Manual for Layer 7 (`FinSc-Fields`)**
 
-`Idris2-Fields-Wiki` provides formal compile-time macro reflection proofs, QuickCheck property test suites, and literate Markdown specifications for **Layer 7** of the non-linear discrete multiset physical law ecosystem.
+`FinSc-Fields-Wiki` provides formal compile-time macro reflection proofs, QuickCheck property test suites, and literate Markdown specifications for **Layer 7** of the non-linear discrete multiset physical law ecosystem.
 
 ---
 
@@ -36,7 +36,7 @@
 To compile the literate verification suite and execute the test runner binary:
 
 ```bash
-idris2 --build Idris2-Fields-Wiki.ipkg
+idris2 --build FinSc-Fields-Wiki.ipkg
 ./build/exec/fields-wiki
 ```
 
@@ -44,13 +44,13 @@ idris2 --build Idris2-Fields-Wiki.ipkg
 
 ## 🏗️ 10-Layer Ecosystem Architecture
 
-1. `Idris2-Multiset-Core` / `Idris2-Multiset-Core-Wiki` (Layer 1: Flat Primitives)
-2. `Idris2-Multiset-Transform` / `Idris2-Multiset-Transform-Wiki` (Layer 2: Fields & Scale Functors)
-3. `Idris2-Multiset-Binary` / `Idris2-Multiset-Binary-Wiki` (Layer 2b: Boolean Field Engines)
-4. `Idris2-Multiset-Ternary` / `Idris2-Multiset-Ternary-Wiki` (Layer 2c: Balanced Ternary Sifting)
-5. `Idris2-Geometry` / `Idris2-Geometry-Wiki` (Layer 3: Emergent Metric Geometry)
-6. `Idris2-Physics` / `Idris2-Physics-Wiki` (Layer 3b/6: Physical Conservation Laws)
-7. `Idris2-Hadron` / `Idris2-Hadron-Wiki` (Layer 4b: Standard Model Confinement)
-8. `Idris2-Chemistry` / `Idris2-Chemistry-Wiki` (Layer 5b: Molecular Kinetics)
-9. `Idris2-Biology` / `Idris2-Biology-Wiki` (Layer 6: Biological Hierarchies & Active Inference)
-10. `Idris2-Universe` / `Idris2-Universe-Wiki` (Layer 10: Cosmic Motive & Master Audit)
+1. `FinSc-Multiset-Core` / `FinSc-Multiset-Core-Wiki` (Layer 1: Flat Primitives)
+2. `FinSc-Multiset-Transform` / `FinSc-Multiset-Transform-Wiki` (Layer 2: Fields & Scale Functors)
+3. `FinSc-Multiset-Binary` / `FinSc-Multiset-Binary-Wiki` (Layer 2b: Boolean Field Engines)
+4. `FinSc-Multiset-Ternary` / `FinSc-Multiset-Ternary-Wiki` (Layer 2c: Balanced Ternary Sifting)
+5. `FinSc-Geometry` / `FinSc-Geometry-Wiki` (Layer 3: Emergent Metric Geometry)
+6. `FinSc-Physics` / `FinSc-Physics-Wiki` (Layer 3b/6: Physical Conservation Laws)
+7. `FinSc-Hadron` / `FinSc-Hadron-Wiki` (Layer 4b: Standard Model Confinement)
+8. `FinSc-Chemistry` / `FinSc-Chemistry-Wiki` (Layer 5b: Molecular Kinetics)
+9. `FinSc-Biology` / `FinSc-Biology-Wiki` (Layer 6: Biological Hierarchies & Active Inference)
+10. `FinSc-Universe` / `FinSc-Universe-Wiki` (Layer 10: Cosmic Motive & Master Audit)

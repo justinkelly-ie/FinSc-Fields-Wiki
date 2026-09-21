@@ -1,9 +1,9 @@
-package Idris2-Fields-Wiki
+package FinSc-Fields-Wiki
 version = 0.1.0
 authors = "Justin Kelly"
 brief   = "Layer 7 Monadic Session Types & Gauge Flux Verification Suite"
 
-depends = Idris2-Electromagnetism, Idris2-Fields, Idris2-Multiset-Core, Idris2-Multiset-Transform, base, idris2-QuickCheck, linear
+depends = FinSc-Electromagnetism, FinSc-Fields, FinSc-Multiset-Core, FinSc-Multiset-Transform, base, idris2-QuickCheck, linear
 sourcedir = "Library"
 
 modules = Wiki.FieldsScaleTransformSpec,

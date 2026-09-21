@@ -6,7 +6,7 @@ Documents and verifies discrete U(1) gauge group algebra, gauge phase compositio
 
 ## 1. Mathematical Foundation & Gauge Homomorphisms
 
-Layer 7 `Idris2-Fields` constructs discrete gauge group transformations and 2-form Maxel curvature multiset field potential interactions:
+Layer 7 `FinSc-Fields` constructs discrete gauge group transformations and 2-form Maxel curvature multiset field potential interactions:
 
 1. **Gauge Group Identity Homomorphism**: $\text{mulGaugePhase}(\text{unitGaugePhase}, g) \equiv g$
 2. **Gauge Group Inverse Homomorphism**: $\text{mulGaugePhase}(g, \text{invGaugePhase}(g)) \equiv \text{unitGaugePhase}$

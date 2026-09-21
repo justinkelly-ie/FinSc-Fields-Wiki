@@ -6,7 +6,7 @@ Documents and verifies scale transformations across gauge field tensors, group a
 
 ## 1. Scale Transformations & Group Action Homomorphisms
 
-Layer 7 `Idris2-Fields` connects local gauge phase rotations with multi-scale physical transport:
+Layer 7 `FinSc-Fields` connects local gauge phase rotations with multi-scale physical transport:
 
 1. **Gauge Action Associativity**: $g_1 \cdot (g_2 \cdot F) \equiv (g_1 \cdot g_2) \cdot F$
 2. **Phase Addition Homomorphism**: $\text{mulGaugePhase}(g_1, g_2)$ commutes with field potential warping.

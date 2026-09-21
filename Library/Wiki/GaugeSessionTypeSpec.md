@@ -6,7 +6,7 @@ Documents and verifies linear session protocols (`SessionProto`), session dualit
 
 ## 1. Linear Session Types & Protocol Duality
 
-In Layer 7 `Idris2-Fields`, gauge field interactions are modeled as linear session communication protocols:
+In Layer 7 `FinSc-Fields`, gauge field interactions are modeled as linear session communication protocols:
 
 1. **Session Protocol AST**: `SessionProto` (`Send a p`, `Recv a p`, `Close`).
 2. **Session Duality Involution**: $\text{dualProto}(\text{dualProto}(p)) = p$
