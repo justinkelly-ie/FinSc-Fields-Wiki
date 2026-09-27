@@ -20,9 +20,9 @@ In Layer 7 `FinSc-Fields`, gauge field interactions are modeled as linear sessio
 ```idris
 module Wiki.GaugeSessionTypeSpec
 
-import Math.Fields.SessionType
-import Geometry.Applicative
-import Geometry.MetricalBounds
+import Stage0.Fields.SessionType
+import Stage0.Applicative
+import Stage1.MetricalBounds
 import Wiki.Generators
 import public QuickCheck
 

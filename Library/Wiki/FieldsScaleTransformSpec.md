@@ -20,15 +20,15 @@ Layer 7 `FinSc-Fields` connects local gauge phase rotations with multi-scale phy
 module Wiki.FieldsScaleTransformSpec
 
 import Data.Vect
-import Core.BoxInt
-import Core.Order.Preorder
-import Core.UnixelFraction
-import Core.VexelMaxel
-import Math.Fields.GaugeGroup
-import Math.OnSeq.FusedStream
+import Stage0.BoxInt
+import Stage1.Order.Preorder
+import Stage1.UnixelFraction
+import Stage1.VexelMaxel
+import Stage1.Fields.GaugeGroup
+import Stage0.OnSeq.FusedStream
 import Data.Fuel
-import Geometry.Applicative
-import Geometry.MetricalBounds
+import Stage0.Applicative
+import Stage1.MetricalBounds
 import Wiki.Generators
 import public QuickCheck
 
@@ -66,14 +66,14 @@ fusedFieldsScaleStream f items =
 
 ||| 1. Gauge Action Associativity: warp (mul g1 g2) tensor == warp g1 (warp g2 tensor)
 public export
-prop_gaugeActionAssociativity : GaugePhase -> GaugePhase -> Core.VexelMaxel.Maxel -> Bool
+prop_gaugeActionAssociativity : GaugePhase -> GaugePhase -> Stage1.VexelMaxel.Maxel -> Bool
 prop_gaugeActionAssociativity g1 g2 tensor =
   warpFieldByGaugeTensor (mulGaugePhase g1 g2) tensor ==
   warpFieldByGaugeTensor g1 (warpFieldByGaugeTensor g2 tensor)
 
 ||| 2. Metrically Transported Energy Density Invariance
 public export
-prop_metricalTransportEnergyInvariance : GaugePhase -> Core.VexelMaxel.Maxel -> Bool
+prop_metricalTransportEnergyInvariance : GaugePhase -> Stage1.VexelMaxel.Maxel -> Bool
 prop_metricalTransportEnergyInvariance phase tensor =
   let u1 = mkUnixelFraction (intToBoxInt 1) 1
       u0 = mkUnixelFraction (intToBoxInt 0) 1

@@ -32,11 +32,11 @@ Layer 7 `FinSc-Fields` constructs discrete gauge group transformations and 2-for
 ```idris
 module Wiki.GaugeInvarianceSpec
 
-import Core.BoxInt
-import Core.UnixelFraction
-import Core.VexelMaxel
-import Math.Fields.GaugeGroup
-import Math.OnSeq.FusedStream
+import Stage0.BoxInt
+import Stage1.UnixelFraction
+import Stage1.VexelMaxel
+import Stage1.Fields.GaugeGroup
+import Stage0.OnSeq.FusedStream
 import Data.Fuel
 import Wiki.Generators
 import public QuickCheck
@@ -81,25 +81,25 @@ prop_gaugeGroupIdentity g =
 
 ||| 2. Electromagnetic Energy Density Invariance: computeFieldEnergy (warpFieldByGaugeTensor phase tensor) == computeFieldEnergy tensor
 public export
-prop_fieldEnergyInvariance : GaugePhase -> Core.VexelMaxel.Maxel -> Bool
+prop_fieldEnergyInvariance : GaugePhase -> Stage1.VexelMaxel.Maxel -> Bool
 prop_fieldEnergyInvariance phase tensor =
   computeFieldEnergy (warpFieldByGaugeTensor phase tensor) == computeFieldEnergy tensor
 
 ||| 3. 4D Dihedral Field Energy Invariance: computeFieldEnergy (warpFieldByDihedralPhase p tensor) == computeFieldEnergy tensor
 public export
-prop_dihedralFieldInvariance : BoxInt -> Core.VexelMaxel.Maxel -> Bool
+prop_dihedralFieldInvariance : BoxInt -> Stage1.VexelMaxel.Maxel -> Bool
 prop_dihedralFieldInvariance p tensor =
   computeFieldEnergy (warpFieldByDihedralPhase p tensor) == computeFieldEnergy tensor
 
 ||| Static Compile-Time Proof Witness Verification
 public export
-0 prfStaticGaugeIdentity : (g : GaugePhase) -> mulGaugePhase Math.Fields.GaugeGroup.unitGaugePhase g = g
+0 prfStaticGaugeIdentity : (g : GaugePhase) -> mulGaugePhase Stage1.Fields.GaugeGroup.unitGaugePhase g = g
 prfStaticGaugeIdentity g = verifyGaugeGroupIdentity g
 
 public export
-0 prfStaticEnergyInvariance : (phase : GaugePhase) -> (tensor : Core.VexelMaxel.Maxel) ->
+0 prfStaticEnergyInvariance : (phase : GaugePhase) -> (tensor : Stage1.VexelMaxel.Maxel) ->
                              computeFieldEnergy (warpFieldByGaugeTensor phase tensor) = computeFieldEnergy tensor
-prfStaticEnergyInvariance phase tensor = Math.Fields.GaugeGroup.verifyGaugeInvariance phase tensor
+prfStaticEnergyInvariance phase tensor = Stage1.Fields.GaugeGroup.verifyGaugeInvariance phase tensor
 
 ||| QuickCheck Execution Runner for Gauge Invariance Suite
 public export

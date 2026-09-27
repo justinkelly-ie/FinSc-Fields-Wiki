@@ -1,10 +1,10 @@
 module Wiki.Main
 
-import Math.Fields.SessionType
-import Math.Fields.GaugeGroup
-import Core.BoxInt
-import Core.UnixelFraction
-import Core.Goh
+import Stage0.Fields.SessionType
+import Stage1.Fields.GaugeGroup
+import Stage0.BoxInt
+import Stage1.UnixelFraction
+import Stage1.Goh
 import Wiki.GaugeInvarianceSpec
 import Wiki.GaugeSessionTypeSpec
 import Wiki.FieldsScaleTransformSpec
@@ -15,8 +15,8 @@ import Wiki.GaugeFieldStreamSpec
 0 prfSessionDuality : (dualProto (dualProto (Send Nat Close)) = Send Nat Close)
 prfSessionDuality = verifySessionDuality (Send Nat Close)
 
-0 prfGaugeInvariance : (computeFieldEnergy (warpFieldByGaugeTensor Math.Fields.GaugeGroup.unitGaugePhase (makeGaugeFieldTensor (intToBoxInt 10) (intToBoxInt 5))) = computeFieldEnergy (makeGaugeFieldTensor (intToBoxInt 10) (intToBoxInt 5)))
-prfGaugeInvariance = verifyGaugeInvariance Math.Fields.GaugeGroup.unitGaugePhase (makeGaugeFieldTensor (intToBoxInt 10) (intToBoxInt 5))
+0 prfGaugeInvariance : (computeFieldEnergy (warpFieldByGaugeTensor Stage1.Fields.GaugeGroup.unitGaugePhase (makeGaugeFieldTensor (intToBoxInt 10) (intToBoxInt 5))) = computeFieldEnergy (makeGaugeFieldTensor (intToBoxInt 10) (intToBoxInt 5)))
+prfGaugeInvariance = verifyGaugeInvariance Stage1.Fields.GaugeGroup.unitGaugePhase (makeGaugeFieldTensor (intToBoxInt 10) (intToBoxInt 5))
 
 main : IO ()
 main = do

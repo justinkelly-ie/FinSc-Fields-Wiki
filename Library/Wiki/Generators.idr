@@ -1,11 +1,11 @@
 module Wiki.Generators
 
 import public QuickCheck
-import Core.BoxInt
-import Core.VexelMaxel
-import Core.UnixelFraction
-import Math.Fields.SessionType
-import Math.Fields.GaugeGroup
+import Stage0.BoxInt
+import Stage1.VexelMaxel
+import Stage1.UnixelFraction
+import Stage0.Fields.SessionType
+import Stage1.Fields.GaugeGroup
 
 %default total
 

@@ -7,8 +7,8 @@ Documents and verifies discrete **Gauge Field Tensor Streams** ($F_{\mu\nu}$) an
 ```idris
 module Wiki.GaugeFieldStreamSpec
 
-import Math.Fields.GaugeFieldStream
-import Core.BoxInt
+import Stage0.Fields.GaugeFieldStream
+import Stage0.BoxInt
 import Data.Fuel
 
 %default total
