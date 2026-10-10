@@ -32,11 +32,21 @@ prop_conjugateGaugeFluxInvariance =
       flux2 = fusedConjugateGaugeFlux (limit 100) [tok1, tok2]
   in flux1 == flux2 && unwrapBox flux2 == 40
 
+||| Property 3: Plaquette Loop Diagonal Contraction & Coordinate Locality Preservation
+public export
+prop_plaquetteLocalityPreservation : Bool
+prop_plaquetteLocalityPreservation =
+  auditPlaquetteLoopDiagonalProof 1 2 3 4 (intToBoxInt 13) &&
+  auditPlaquetteMatterLocalityProof 1 2 3 4 (intToBoxInt 13) (intToBoxInt 9) &&
+  auditGaugeFieldStreamProof
+
 ||| Direct Suite Execution for Gauge Field Stream Specification
 public export
 auditGaugeFieldStreamSpecProof : IO Bool
 auditGaugeFieldStreamSpecProof = do
   let p1 = prop_gaugeFluxIntegrationLinearity
   let p2 = prop_conjugateGaugeFluxInvariance
-  pure (p1 && p2)
+  let p3 = prop_plaquetteLocalityPreservation
+  pure (p1 && p2 && p3)
 ```
+
