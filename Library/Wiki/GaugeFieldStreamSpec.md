@@ -14,7 +14,7 @@ import Data.Fuel
 %default total
 
 ||| Property 1: Gauge Field Flux Integration Linearity
-public export covering
+public export
 prop_gaugeFluxIntegrationLinearity : Bool
 prop_gaugeFluxIntegrationLinearity =
   let tok1 = (MkIndex 0 1, intToBoxInt 15)
@@ -23,7 +23,7 @@ prop_gaugeFluxIntegrationLinearity =
   in unwrapBox flux == 40
 
 ||| Property 2: 2LTT Conjugate Hylomorphism Gauge Flux Invariance
-public export covering
+public export
 prop_conjugateGaugeFluxInvariance : Bool
 prop_conjugateGaugeFluxInvariance =
   let tok1 = (MkIndex 0 1, intToBoxInt 15)
@@ -33,11 +33,10 @@ prop_conjugateGaugeFluxInvariance =
   in flux1 == flux2 && unwrapBox flux2 == 40
 
 ||| Direct Suite Execution for Gauge Field Stream Specification
-public export covering
+public export
 auditGaugeFieldStreamSpecProof : IO Bool
 auditGaugeFieldStreamSpecProof = do
   let p1 = prop_gaugeFluxIntegrationLinearity
   let p2 = prop_conjugateGaugeFluxInvariance
   pure (p1 && p2)
-
 ```

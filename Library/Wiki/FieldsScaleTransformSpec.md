@@ -52,17 +52,11 @@ record VerifiedFieldsScaleState where
   scaleAfter  : Nat
   0 scalePrf  : GaugeScaleHomomorphismWitness scaleBefore scaleAfter
 
-||| $O(1)$ allocation deforested fields scale stream transducer using fusedHylomorphism
-public export covering
+||| $O(1)$ allocation deforested fields scale stream transducer using foldStreamNat
+public export
 fusedFieldsScaleStream : Fuel -> List (Nat, Nat) -> Nat
-fusedFieldsScaleStream f items =
-  fusedHylomorphism f
-    (\st => case st of
-              [] => Done
-              (k1, k2) :: rest => Yield (k1 + k2) rest)
-    (\val, acc => val + acc)
-    0
-    items
+fusedFieldsScaleStream _ items =
+  foldStreamNat (length items) (\acc, (k1, k2) => acc + k1 + k2) 0 (stream items)
 
 ||| 1. Gauge Action Associativity: warp (mul g1 g2) tensor == warp g1 (warp g2 tensor)
 public export

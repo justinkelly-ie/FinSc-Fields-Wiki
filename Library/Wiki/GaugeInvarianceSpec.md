@@ -61,17 +61,11 @@ record VerifiedGaugeState where
   fieldEnergyAfter  : Nat
   0 covariancePrf    : GaugeCovarianceWitness fieldEnergyBefore fieldEnergyAfter
 
-||| $O(1)$ allocation deforested gauge curvature stream transducer using fusedHylomorphism
-public export covering
+||| $O(1)$ allocation deforested gauge curvature stream transducer using foldStreamNat
+public export
 fusedGaugeCurvatureStream : Fuel -> List (Nat, Nat) -> Nat
-fusedGaugeCurvatureStream f items =
-  fusedHylomorphism f
-    (\st => case st of
-              [] => Done
-              (f1, f2) :: rest => Yield (f1 + f2) rest)
-    (\val, acc => val + acc)
-    0
-    items
+fusedGaugeCurvatureStream _ items =
+  foldStreamNat (length items) (\acc, (f1, f2) => acc + f1 + f2) 0 (stream items)
 
 ||| 1. Gauge Group Identity: mulGaugePhase unitGaugePhase g == g
 public export
