@@ -9,6 +9,7 @@ module Wiki.GaugeFieldStreamSpec
 
 import Stage0.Fields.GaugeFieldStream
 import Stage0.BoxInt
+import Stage0.StructuralFuel
 import Data.Fuel
 
 %default total
@@ -19,7 +20,7 @@ prop_gaugeFluxIntegrationLinearity : Bool
 prop_gaugeFluxIntegrationLinearity =
   let tok1 = (MkIndex 0 1, intToBoxInt 15)
       tok2 = (MkIndex 1 2, intToBoxInt 25)
-      flux = fusedIntegrateGaugeFlux (limit 100) [tok1, tok2]
+      flux = fusedIntegrateGaugeFluxFuelModel hyperbolicGohFuelModel [tok1, tok2]
   in unwrapBox flux == 40
 
 ||| Property 2: 2LTT Conjugate Hylomorphism Gauge Flux Invariance
@@ -28,8 +29,8 @@ prop_conjugateGaugeFluxInvariance : Bool
 prop_conjugateGaugeFluxInvariance =
   let tok1 = (MkIndex 0 1, intToBoxInt 15)
       tok2 = (MkIndex 1 2, intToBoxInt 25)
-      flux1 = fusedIntegrateGaugeFlux (limit 100) [tok1, tok2]
-      flux2 = fusedConjugateGaugeFlux (limit 100) [tok1, tok2]
+      flux1 = fusedIntegrateGaugeFluxFuelModel hyperbolicGohFuelModel [tok1, tok2]
+      flux2 = fusedConjugateGaugeFluxFuelModel hyperbolicGohFuelModel [tok1, tok2]
   in flux1 == flux2 && unwrapBox flux2 == 40
 
 ||| Property 3: Plaquette Loop Diagonal Contraction & Coordinate Locality Preservation

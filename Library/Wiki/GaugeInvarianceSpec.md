@@ -37,6 +37,7 @@ import Stage1.UnixelFraction
 import Stage1.VexelMaxel
 import Stage1.Fields.GaugeGroup
 import Stage0.OnSeq.FusedStream
+import Stage0.StructuralFuel
 import Data.Fuel
 import Wiki.Generators
 import public QuickCheck
@@ -61,11 +62,11 @@ record VerifiedGaugeState where
   fieldEnergyAfter  : Nat
   0 covariancePrf    : GaugeCovarianceWitness fieldEnergyBefore fieldEnergyAfter
 
-||| $O(1)$ allocation deforested gauge curvature stream transducer using foldStreamNat
+||| $O(1)$ allocation deforested gauge curvature stream transducer using foldStreamNat and model-indexed GohFuel
 public export
-fusedGaugeCurvatureStream : Fuel -> List (Nat, Nat) -> Nat
-fusedGaugeCurvatureStream _ items =
-  foldStreamNat (length items) (\acc, (f1, f2) => acc + f1 + f2) 0 (stream items)
+fusedGaugeCurvatureStream : GohFuel cap -> List (Nat, Nat) -> Nat
+fusedGaugeCurvatureStream fuel items =
+  foldStreamNat (gohSteps fuel) (\acc, (f1, f2) => acc + f1 + f2) 0 (stream items)
 
 ||| 1. Gauge Group Identity: mulGaugePhase unitGaugePhase g == g
 public export
@@ -102,6 +103,6 @@ auditGaugeInvarianceSpecProof = do
   let r1 = qc prop_gaugeGroupIdentity
   let r2 = qc2 prop_fieldEnergyInvariance
   let r3 = qc2 prop_dihedralFieldInvariance
-  let streamSum = fusedGaugeCurvatureStream (limit 100) [(2, 2), (4, 4)]
+  let streamSum = fusedGaugeCurvatureStream hyperbolicGohFuelModel [(2, 2), (4, 4)]
   pure (r1.pass == Just True && r2.pass == Just True && r3.pass == Just True && streamSum == 12)
 ```

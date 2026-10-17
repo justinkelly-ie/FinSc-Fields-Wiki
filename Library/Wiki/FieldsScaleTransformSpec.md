@@ -26,6 +26,7 @@ import Stage1.UnixelFraction
 import Stage1.VexelMaxel
 import Stage1.Fields.GaugeGroup
 import Stage0.OnSeq.FusedStream
+import Stage0.StructuralFuel
 import Data.Fuel
 import Stage0.Applicative
 import Stage1.MetricalBounds
@@ -52,11 +53,11 @@ record VerifiedFieldsScaleState where
   scaleAfter  : Nat
   0 scalePrf  : GaugeScaleHomomorphismWitness scaleBefore scaleAfter
 
-||| $O(1)$ allocation deforested fields scale stream transducer using foldStreamNat
+||| $O(1)$ allocation deforested fields scale stream transducer using foldStreamNat and model-indexed GohFuel
 public export
-fusedFieldsScaleStream : Fuel -> List (Nat, Nat) -> Nat
-fusedFieldsScaleStream _ items =
-  foldStreamNat (length items) (\acc, (k1, k2) => acc + k1 + k2) 0 (stream items)
+fusedFieldsScaleStream : GohFuel cap -> List (Nat, Nat) -> Nat
+fusedFieldsScaleStream fuel items =
+  foldStreamNat (gohSteps fuel) (\acc, (k1, k2) => acc + k1 + k2) 0 (stream items)
 
 ||| 1. Gauge Action Associativity: warp (mul g1 g2) tensor == warp g1 (warp g2 tensor)
 public export
@@ -87,6 +88,6 @@ auditFieldsScaleTransformSpecProof : IO Bool
 auditFieldsScaleTransformSpecProof = do
   let r1 = qc2 prop_metricalTransportEnergyInvariance
   let r2 = qc3 prop_gaugeActionAssociativity
-  let streamSum = fusedFieldsScaleStream (limit 100) [(7, 8), (14, 16)]
+  let streamSum = fusedFieldsScaleStream hyperbolicGohFuelModel [(7, 8), (14, 16)]
   pure (r1.pass == Just True && r2.pass == Just True && streamSum == 45)
 ```
