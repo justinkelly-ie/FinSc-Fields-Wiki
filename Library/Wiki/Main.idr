@@ -9,6 +9,7 @@ import Wiki.GaugeInvarianceSpec
 import Wiki.GaugeSessionTypeSpec
 import Wiki.FieldsScaleTransformSpec
 import Wiki.GaugeFieldStreamSpec
+import Stage1.Fields.OctonionGaugeUnification
 import Reflect.GaugeAuditor
 import Language.Reflection
 
@@ -67,8 +68,13 @@ main = do
      then putStrLn "  [TEST 6] Gauge Field Tensor Stream Flux Integration: PASSED ✅"
      else putStrLn "  [TEST 6] Gauge Field Tensor Stream Flux Integration: FAILED ❌"
 
+  let okG2 = auditG2DimensionSum && auditGellMannTraceless && auditGellMannLambda3Squared
+  if okG2
+     then putStrLn "  [TEST 7] Octonionic G2 -> SU(3) + 3 + 3* Gauge Decomposition & Gell-Mann Tracelessness: PASSED ✅"
+     else putStrLn "  [TEST 7] Octonionic G2 -> SU(3) + 3 + 3* Gauge Decomposition: FAILED ❌"
+
   putStrLn "========================================================"
-  if okInvariance && okSession && okScale && okStream
+  if okInvariance && okSession && okScale && okStream && okG2
      then putStrLn " ✨ ALL LAYER 7 GAUGE FIELD SUITES & QUICKCHECK PASSED ✨"
      else putStrLn " ❌ LAYER 7 GAUGE FIELD VERIFICATION FAILED"
   putStrLn "========================================================"
