@@ -23,7 +23,7 @@ import Data.Vect
 import Stage0.BoxInt
 import Stage1.Order.Preorder
 import Stage1.UnixelFraction
-import Stage1.VexelMaxel
+import Stage1.Carrier.Maxel
 import Stage1.Fields.GaugeGroup
 import Stage0.OnSeq.FusedStream
 import Stage0.StructuralFuel
@@ -61,14 +61,14 @@ fusedFieldsScaleStream fuel items =
 
 ||| 1. Gauge Action Associativity: warp (mul g1 g2) tensor == warp g1 (warp g2 tensor)
 public export
-prop_gaugeActionAssociativity : GaugePhase -> GaugePhase -> Stage1.VexelMaxel.Maxel -> Bool
+prop_gaugeActionAssociativity : GaugePhase -> GaugePhase -> Maxel -> Bool
 prop_gaugeActionAssociativity g1 g2 tensor =
   warpFieldByGaugeTensor (mulGaugePhase g1 g2) tensor ==
   warpFieldByGaugeTensor g1 (warpFieldByGaugeTensor g2 tensor)
 
 ||| 2. Metrically Transported Energy Density Invariance
 public export
-prop_metricalTransportEnergyInvariance : GaugePhase -> Stage1.VexelMaxel.Maxel -> Bool
+prop_metricalTransportEnergyInvariance : GaugePhase -> Maxel -> Bool
 prop_metricalTransportEnergyInvariance phase tensor =
   let u1 = mkUnixelFraction (intToBoxInt 1) 1
       u0 = mkUnixelFraction (intToBoxInt 0) 1

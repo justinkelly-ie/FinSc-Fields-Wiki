@@ -2,7 +2,8 @@ module Wiki.Generators
 
 import public QuickCheck
 import Stage0.BoxInt
-import Stage1.VexelMaxel
+import Stage1.Carrier.Maxel
+import Stage1.Basis.Coordinate
 import Stage1.UnixelFraction
 import Stage0.Fields.SessionType
 import Stage1.Fields.GaugeGroup
@@ -21,8 +22,8 @@ Arbitrary UnixelFraction where
     d <- arbitrary {a = Nat}
     let d' = if d == 0 then 1 else d
     pure (mkUnixelFraction (intToBoxInt (cast n)) d')
-  coarbitrary (MkUnixelFraction (MkBoxInt n) (MkUnixel d)) gen =
-    coarbitrary (the Integer n) (coarbitrary (the Nat d) gen)
+  coarbitrary frac gen =
+    coarbitrary (the Integer (unwrapBox frac.num)) (coarbitrary (the Nat (denominatorNat frac)) gen)
 
 public export
 Arbitrary GaugePhase where

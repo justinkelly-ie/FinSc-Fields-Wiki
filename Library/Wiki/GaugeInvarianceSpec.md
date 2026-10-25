@@ -34,7 +34,7 @@ module Wiki.GaugeInvarianceSpec
 
 import Stage0.BoxInt
 import Stage1.UnixelFraction
-import Stage1.VexelMaxel
+import Stage1.Carrier.Maxel
 import Stage1.Fields.GaugeGroup
 import Stage0.OnSeq.FusedStream
 import Stage0.StructuralFuel
@@ -76,13 +76,13 @@ prop_gaugeGroupIdentity g =
 
 ||| 2. Electromagnetic Energy Density Invariance: computeFieldEnergy (warpFieldByGaugeTensor phase tensor) == computeFieldEnergy tensor
 public export
-prop_fieldEnergyInvariance : GaugePhase -> Stage1.VexelMaxel.Maxel -> Bool
+prop_fieldEnergyInvariance : GaugePhase -> Maxel -> Bool
 prop_fieldEnergyInvariance phase tensor =
   computeFieldEnergy (warpFieldByGaugeTensor phase tensor) == computeFieldEnergy tensor
 
 ||| 3. 4D Dihedral Field Energy Invariance: computeFieldEnergy (warpFieldByDihedralPhase p tensor) == computeFieldEnergy tensor
 public export
-prop_dihedralFieldInvariance : BoxInt -> Stage1.VexelMaxel.Maxel -> Bool
+prop_dihedralFieldInvariance : BoxInt -> Maxel -> Bool
 prop_dihedralFieldInvariance p tensor =
   computeFieldEnergy (warpFieldByDihedralPhase p tensor) == computeFieldEnergy tensor
 
@@ -92,7 +92,7 @@ public export
 prfStaticGaugeIdentity g = verifyGaugeGroupIdentity g
 
 public export
-0 prfStaticEnergyInvariance : (phase : GaugePhase) -> (tensor : Stage1.VexelMaxel.Maxel) ->
+0 prfStaticEnergyInvariance : (phase : GaugePhase) -> (tensor : Maxel) ->
                              computeFieldEnergy (warpFieldByGaugeTensor phase tensor) = computeFieldEnergy tensor
 prfStaticEnergyInvariance phase tensor = Stage1.Fields.GaugeGroup.verifyGaugeInvariance phase tensor
 
