@@ -2,7 +2,6 @@ module Wiki.Generators
 
 import public QuickCheck
 import Stage0.BoxInt
-import Stage1.Carrier.Maxel
 import Stage1.Basis.Coordinate
 import Stage1.UnixelFraction
 import Stage0.Fields.SessionType

@@ -23,7 +23,7 @@ import Data.Vect
 import Stage0.BoxInt
 import Stage1.Order.Preorder
 import Stage1.UnixelFraction
-import Stage1.Carrier.Maxel
+import Stage1.Basis.Coordinate
 import Stage1.Fields.GaugeGroup
 import Stage0.OnSeq.FusedStream
 import Stage0.StructuralFuel
