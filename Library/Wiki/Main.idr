@@ -68,9 +68,10 @@ main = do
      then putStrLn "  [TEST 6] Gauge Field Tensor Stream Flux Integration: PASSED ✅"
      else putStrLn "  [TEST 6] Gauge Field Tensor Stream Flux Integration: FAILED ❌"
 
-  let okG2 = auditG2DimensionSum && auditGellMannTraceless && auditGellMannLambda3Squared
+  let okG2 = auditG2DimensionSum && auditGellMannTraceless && auditGellMannLambda3Squared &&
+             auditGellMannCommutator12 && auditGellMannCommutator13 && auditGellMannCommutator45
   if okG2
-     then putStrLn "  [TEST 7] Octonionic G2 -> SU(3) + 3 + 3* Gauge Decomposition & Gell-Mann Tracelessness: PASSED ✅"
+     then putStrLn "  [TEST 7] Octonionic G2 -> SU(3) + 3 + 3* Gauge Decomposition & Gell-Mann Lie Bracket Pixel Contraction: PASSED ✅"
      else putStrLn "  [TEST 7] Octonionic G2 -> SU(3) + 3 + 3* Gauge Decomposition: FAILED ❌"
 
   putStrLn "========================================================"
