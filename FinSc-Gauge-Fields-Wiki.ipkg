@@ -1,7 +1,7 @@
 package FinSc-Gauge-Fields-Wiki
 version = 0.1.0
 authors = "Justin Kelly"
-brief   = "Layer 4a Monadic Session Types & Gauge Flux Verification Suite"
+brief   = "Layer 8 Monadic Session Types & Gauge Flux Verification Suite"
 
 depends = FinSc-Electromagnetism, FinSc-Gauge-Fields, FinSc-Multiset, FinSc-Metric-Substrate, FinSc-Phase-Unfolding, base, idris2-QuickCheck, linear
 sourcedir = "Library"
