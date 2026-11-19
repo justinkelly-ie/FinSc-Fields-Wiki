@@ -19,7 +19,7 @@ In traditional concurrency theory (Honda 1993, Wadler 2014), **Linear Session Ty
 ### The Constructive Finite Science Refinement
 
 In finite science, physical spacetime contains no abstract "message brokers" or mock channel identifiers (`MkChan id`). Instead:
-- Every communication endpoint is a **discrete multiset carrier** $\mathcal{M} : \text{Multiset } \text{BoxInt } \alpha$.
+- Every communication endpoint is a **discrete multiset carrier** $\mathcal{M} : \text{Carrier } \alpha$.
 - A `Send` action corresponds to depositing flux particles of weight $w$ into the exchange boundary:
   $$\text{depositGaugeFlux} : \mathcal{M} \xrightarrow{+w} \mathcal{M}'$$
 - A `Recv` action corresponds to withdrawing flux particles from the exchange boundary:
@@ -71,27 +71,27 @@ public export
 prop_multisetChannelTransmission : Bool
 prop_multisetChannelTransmission =
   let initChan : MultisetSession (Send Nat (Recv Nat Close)) Nat
-      initChan = MkMsetChan ZeroM
+      initChan = MkMsetChan neutral
       chanAfterSend = depositGaugeFlux initChan 42 (MkBoxInt 10)
       chanAsRecv : MultisetSession (Recv Nat Close) Nat
       chanAsRecv = chanAfterSend
   in case withdrawGaugeFlux chanAsRecv of
        Right (val, w, chanAfterRecv) =>
          val == 42 && unwrapBox w == 10 &&
-         unwrapBox (multisetSum (closeGaugeSession chanAfterRecv)) == 0
+         unwrapBox (totalMassBox (closeGaugeSession chanAfterRecv)) == 0
        Left _ => False
 
 ||| 3. Bilateral Multiset Flux Exchange & Total Charge Preservation
 public export
 prop_bilateralFluxExchangeConservation : Bool
 prop_bilateralFluxExchangeConservation =
-  let src : Multiset BoxInt Nat
-      src = AddM 1 (MkBoxInt 15) ZeroM
-      dst : Multiset BoxInt Nat
-      dst = AddM 2 (MkBoxInt 25) ZeroM
+  let src : Carrier Nat
+      src = singletonCarrier 1 (MkBoxInt 15)
+      dst : Carrier Nat
+      dst = singletonCarrier 2 (MkBoxInt 25)
       result = exchangeGaugeFlux src dst 3 (MkBoxInt 10)
-      srcWeight = unwrapBox (multisetSum result.sourceMset)
-      dstWeight = unwrapBox (multisetSum result.destMset)
+      srcWeight = unwrapBox (totalMassBox result.sourceMset)
+      dstWeight = unwrapBox (totalMassBox result.destMset)
   in (srcWeight + dstWeight) == (15 + 25 + 10)
 
 ||| QuickCheck Execution Runner for Session Type Suite
